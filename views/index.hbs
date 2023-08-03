@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Youtube 影音下載</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="header">
+            <div id="title">Youtube 影音破解下載器</div>
+            <div id="author">作者：蔡宇倫</div>
+        </div>
+
+        <div id="downloadarea">
+            <form id="downloadForm" action="/download" method="post">
+                <input type="text" name="urlinput" id="urlinput" placeholder="請貼上 Youtube 的網址">
+                <input type="submit" value="MP3下載" id="musicdownloadbtn" onclick="setDownloadType('MP3')">
+                <input type="submit" value="MP4下載" id="videodownloadbtn" onclick="setDownloadType('MP4')">
+            </form>
+        </div>
+
+    </div>
+</body>
+<script>
+    function setDownloadType(type) {
+        const downloadTypeInput = document.createElement('input');
+        downloadTypeInput.type = 'hidden';
+        downloadTypeInput.name = 'downloadtype';
+        downloadTypeInput.value = type;
+        document.getElementById('downloadForm').appendChild(downloadTypeInput);
+    }
+</script>
+
+</html>
