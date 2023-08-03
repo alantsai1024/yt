@@ -1,6 +1,9 @@
-
 import sys
+import os
 from pytube import YouTube
+
+download_path = os.path.expanduser('~') + '/Downloads/'
+os.chdir(download_path)
 
 def download_video(url, download_type):
     try:
@@ -8,11 +11,13 @@ def download_video(url, download_type):
 
         if download_type == 'MP3':
             audio_stream = yt.streams.filter(only_audio=True, file_extension='mp4').first()
-            audio_stream.download()
+            file_path = os.path.join(download_path, yt.title + ".mp3")
+            audio_stream.download(filename = yt.title + '.mp3')
             print(f"Downloaded {yt.title} as MP3")
         elif download_type == 'MP4':
             video_stream = yt.streams.get_highest_resolution()
-            video_stream.download()
+            file_path = os.path.join(download_path,  yt.title + '.mp4')
+            video_stream.download(filename = yt.title + '.mp4')
             print(f"Downloaded {yt.title} as MP4")
         else:
             print("Invalid download type")
