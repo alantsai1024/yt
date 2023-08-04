@@ -27,12 +27,22 @@
 </body>
 <script>
     function setDownloadType(type) {
+        const downloadForm = document.getElementById('downloadForm');
+
+        // 如果已經有一個名為 downloadtype 的 input 欄位，就先移除它
+        const existingDownloadTypeInput = downloadForm.querySelector('input[name="downloadtype"]');
+        if (existingDownloadTypeInput) {
+            existingDownloadTypeInput.remove();
+        }
+
+        // 創建新的 downloadtype input 欄位
         const downloadTypeInput = document.createElement('input');
         downloadTypeInput.type = 'hidden';
         downloadTypeInput.name = 'downloadtype';
         downloadTypeInput.value = type;
-        document.getElementById('downloadForm').appendChild(downloadTypeInput);
+        downloadForm.appendChild(downloadTypeInput);
     }
+
 </script>
 
 </html>

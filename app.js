@@ -15,10 +15,13 @@ app.get('/', (req, res) => {
 });
 
 app.post('/download', async (req, res) => {
-    const url = req.body.urlinput;
+    let url = req.body.urlinput;
     const downloadType = req.body.downloadtype;
-
+   
     try {
+        // 對 URL 進行解碼
+        url = decodeURIComponent(url);
+
         const info = await ytdl.getInfo(url);
         const title = info.videoDetails.title;
         if (downloadType === 'MP3') {
@@ -26,19 +29,23 @@ app.post('/download', async (req, res) => {
             const fileName = `${title}.mp3`;
             res.set('Content-Disposition', contentDisposition(fileName));
             ytdl(url, { format: audioFormat }).pipe(res);
+            
         } else if (downloadType === 'MP4') {
             const videoFormat = ytdl.chooseFormat(info.formats, { filter: 'audioandvideo', quality: 'highestvideo' });
             const fileName = `${title}.mp4`;
             res.set('Content-Disposition', contentDisposition(fileName));
             ytdl(url, { format: videoFormat }).pipe(res);
+
         } else {
             res.status(400).send('Invalid download type');
         }
+        
     } catch (err) {
         console.error(err);
         res.status(500).send('Error downloading the video/audio');
     }
 });
+
 
 app.listen(3000, () => {
     console.log(`服務器運行為 http://localhost:3000`);
