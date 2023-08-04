@@ -136,3 +136,46 @@ form {
     color: #fff;
 }
 
+@media only screen and (max-width:1200px) {
+    #videodownloadbtn {
+        margin-top: 1%;
+        width: 90%;
+    }
+
+    #musicdownloadbtn {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width:768px) {
+    #videodownloadbtn {
+        margin-top: 1%;
+        width: 90%;
+    }
+
+    #musicdownloadbtn {
+        width: 90%;
+    }
+
+    #urlinput {
+        width: 90%;
+        font-size: larger;
+        text-align: center;
+    }
+
+    #header {
+        width: 90%;
+    }
+
+    #title {
+        font-size: 31px;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    #author {
+        font-size: 25px;
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+}
