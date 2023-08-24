@@ -25,10 +25,11 @@ app.post('/download', async (req, res) => {
         const info = await ytdl.getInfo(url);
         const title = info.videoDetails.title;
         if (downloadType === 'MP3') {
-            const audioFormat = ytdl.chooseFormat(info.formats, { quality: 'highestaudio' });
+            const audioFormat = ytdl.chooseFormat(info.formats, { quality:'lowestaudio'});
             const fileName = `${title}.mp3`;
             res.set('Content-Disposition', contentDisposition(fileName));
             ytdl(url, { format: audioFormat }).pipe(res);
+            console.log(res);
             
         } else if (downloadType === 'MP4') {
             const videoFormat = ytdl.chooseFormat(info.formats, { filter: 'audioandvideo', quality: 'highestvideo' });
